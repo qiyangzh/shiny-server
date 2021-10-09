@@ -20,16 +20,6 @@
 rm(list=ls(all=TRUE))
 
 # Load packages
-# test<-require(googledrive)   #functions for reading data from Google
-# if (test == FALSE) {
-#   install.packages("googledrive")
-#   require(googledrive)
-# }
-# test<-require(googlesheets4)   #functions for reading data from Google
-# if (test == FALSE) {
-#   install.packages("googlesheets4")
-#   require(googlesheets4)
-# }
 test<-require(janitor)   #remove_empty()
 if (test == FALSE) {
   install.packages("janitor")
@@ -55,9 +45,21 @@ if (test == FALSE) {
   install.packages("readxl")
   require(readxl)
 }
-library(officer)
-library(flextable)
-library(huxtable)
+test<-require(officer)
+if (test == FALSE) {
+  install.packages("officer")
+  require(officer)
+}
+test<-require(flextable) 
+if (test == FALSE) {
+  install.packages("flextable")
+  require(flextable)
+}
+test<-require(huxtable)
+if (test == FALSE) {
+  install.packages("huxtable")
+  require(huxtable)
+}
 rm(test)
 
 load_E4E <- function() {
