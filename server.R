@@ -1,0 +1,47 @@
+server <- function(input, output) {
+    source("server.R")
+    orig <- load_E4E()
+    # output$size <- renderText({
+    #     paste("size: ", height(), sep = "")
+    # })
+    
+    df <- reactive({
+        egm_df <- prep_egm(apply_choices(orig, input$Rating, input$Topic, input$Grade))
+        make_egm(egm_df)   
+    })
+    
+    height <- reactive({
+        egm_df <- prep_egm(apply_choices(orig, input$Rating, input$Topic, input$Grade))
+        # if(input$detail=="Programs"){
+            length(unique(egm_df$name))*150
+        # } else {
+        #     length(unique(egm_df$Program))*600   # If not programs, then it's types of programs
+        # }
+    })
+
+    output$contents <- renderPlot({
+        df()
+    })
+    
+    output$map <- renderUI({
+        # fillPage(plotOutput("contents", height = height(), width = "100%"))
+        #plotOutput("contents", height = "200", width = "100%")
+        plotOutput("contents", height = height(), width = "100%")
+    })
+    
+    output$hover_info <- renderPrint({
+        if(!is.null(input$plot_hover)){
+            plotdf <- prep_egm(apply_choices(orig, input$Rating, input$Topic, input$Grade))
+            hover=input$plot_hover
+            dist=sqrt((hover$x-plotdf$size)^2+(hover$y - plotdf$`Effect Size`)^2)
+            #cat(" x =", hover$x, "y =", hover$y, "\n",
+            #    "min dist =", min(dist), "\n",
+            #    "which = ", which.min(dist), "\n",
+            cat(paste(plotdf$name[which.min(dist)]), paste(plotdf$url[which.min(dist)]), sep="\n")
+        }
+        
+        
+    })
+}
+
+shinyApp(ui = ui, server = server)
