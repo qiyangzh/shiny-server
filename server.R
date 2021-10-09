@@ -1,5 +1,5 @@
 server <- function(input, output) {
-    source("server.R")
+    source("E4E.R")
     orig <- load_E4E()
     # output$size <- renderText({
     #     paste("size: ", height(), sep = "")
