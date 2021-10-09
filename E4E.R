@@ -253,17 +253,3 @@ make_egm <- function(data){
   return(egm)
 }
 
-# for saving output for troubleshooting
-# savedata <- function(data){
-#   # data <- data
-#   agg_color <- data[c("name", "topic", "color")]
-#   agg_sample <- data[c("name", "topic", "color","Sample Size")]
-#   
-#   library(reshape2)
-#   wide_color <- dcast(agg_color, name ~ topic)
-#   wide_sample <- dcast(agg_sample, name ~ topic)
-#   
-#   write.csv(wide_color, "EGM_color.csv")
-#   write.csv(wide_sample, "EGM_size.csv")
-#   write.csv(data, "EGM_data.csv")
-# }
