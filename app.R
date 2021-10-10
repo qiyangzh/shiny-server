@@ -31,7 +31,7 @@ ui <- fluidPage(
 )
 
 server <- function(input, output) {
-    source("server.R")
+    source("e4e_egm.R")
     orig <- load_E4E()
     # output$size <- renderText({
     #     paste("size: ", height(), sep = "")
